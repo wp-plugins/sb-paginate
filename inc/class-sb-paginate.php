@@ -1,0 +1,112 @@
+<?php
+if(!defined('ABSPATH')) exit;
+if(!class_exists("SB_Paginate")) {
+	class SB_Paginate {
+		public static function build($args = array()) {
+			global $wp_query;
+			$query = $wp_query;
+			$label = "Pages";
+			$previous = "&laquo;";
+			$next = "&raquo;";
+			
+			extract($args, EXTR_OVERWRITE);
+			
+			if(!isset($query) || empty($query) || !is_object($query)) return;
+			
+			$posts_per_page = isset($query->query_vars['posts_per_page']) ? $query->query_vars['posts_per_page'] : get_option("posts_per_page");
+			
+			if(1 > $posts_per_page) return;
+			$total_page = intval(ceil($query->found_posts / $posts_per_page));
+			$current_page = isset($query->query_vars["paged"]) ? $query->query_vars["paged"] : '0';
+			
+			if(1 > $current_page || $current_page > $total_page) {
+				$current_page = self::get_paged();
+			}
+			$args["current_page"] = $current_page;
+			
+			
+			if(1 >= $total_page) return;
+			$args["total_page"] = $total_page;
+			$result = '';
+			$label = trim($label);
+			if(!empty($label)) {
+				$last_char = mb_substr($label, -1);
+				if(':' != $last_char) {
+					$label .= ':';
+				}
+				$result .= '<span class="paginate-item label-item">'.$label.'</span>';
+			}
+
+			if ($current_page > 1) {
+				$result .= '<a class="paginate-item previous-item" href="'.get_pagenum_link($current_page - 1).'" data-paged="'.($current_page - 1).'">'.$previous.'</a>';
+			}
+			$result .= self::loop_paginate($args);
+			if ($current_page < $total_page) {
+				$result .= '<a href="'.get_pagenum_link($current_page + 1).'" class="paginate-item next-item" data-paged="'.($current_page + 1).'">'.$next.'</a>';
+			}
+			return $result;
+		}
+
+		public static function show($args = null) {
+			echo '<nav class="pagination loop-pagination sb-paginate">';
+			echo self::build($args);
+			echo '</nav>';
+		}
+
+
+		private static function loop_paginate($args = array()) {
+		
+			// The number of page links to show before and after the current page.
+			$range = 3;
+			
+			// The number of page links to show at beginning and end of pagination.
+			$anchor = 1;
+			
+			// The minimum number of page links before ellipsis shows.
+			$gap = 3;
+			
+			extract($args, EXTR_OVERWRITE);
+			$hidden_button = '<span class="paginate-item hidden-item">...</span>';
+			$result = "";
+			$hidden_before = false;
+			$hidden_after = false;
+			$before_current = $current_page - $range;
+			$after_current = $current_page + $range;
+			for($i = 1; $i <= $total_page; $i++) {
+				if($current_page == $i) {
+					$result .= '<span class="paginate-item current-item">'.$i.'</span>';
+				} else {
+					$count_hidden_button_before = $before_current - ($anchor + 1);
+					$count_hidden_button_after = $total_page - ($after_current + 1);
+					
+					$show_hidden_button_before = ($i < $before_current && !$hidden_before && $count_hidden_button_before >= $gap) ? true : false;
+					$show_hidden_button_after = ($i > $after_current && !$hidden_after && $count_hidden_button_after >= $gap) ? true : false;
+					
+					if(1 == $i || $total_page == $i || ($i <= $after_current && $i >= $before_current)) {
+						$result .= '<a class="paginate-item" href="'.get_pagenum_link($i).'" data-paged="'.$i.'">'.$i.'</a>';
+					} else {
+						if($show_hidden_button_before) {
+							$result .= $hidden_button;
+							$hidden_before = true;
+							$i = $before_current - 1;
+						} elseif($i < $before_current) {
+							$result .= '<a class="paginate-item" href="'.get_pagenum_link($i).'" data-paged="'.$i.'">'.$i.'</a>';
+						} elseif($show_hidden_button_after) {
+							$result .= $hidden_button;
+							$hidden_after = true;
+							$i = $total_page - 1;
+						} else {
+							$result .= '<a class="paginate-item" href="'.get_pagenum_link($i).'" data-paged="'.$i.'">'.$i.'</a>';
+						}
+					}
+				}
+			}
+			return $result;
+		}
+
+		private static function get_paged() {
+			$paged = intval(get_query_var('paged')) ? intval(get_query_var('paged')) : 1;
+			return $paged;
+		}
+	}
+}
