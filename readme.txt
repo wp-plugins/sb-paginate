@@ -4,7 +4,7 @@ Donate link: http://hocwp.net/donate/
 Tags: sb, paginate, pagination, sb plugin, sb paginate, wp paginate, paginate plugin
 Requires at least: 3.6
 Tested up to: 4.0
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,9 @@ For basic usage, you can also have a look at the [plugin homepage](http://hocwp.
 2. The pagination in dark style with no border radius.
 
 == Changelog ==
+
+= V1.0.3 =
+* Fix: Missing committed files.
 
 = V1.0.2 =
 * Update: Compress css and javascript.
