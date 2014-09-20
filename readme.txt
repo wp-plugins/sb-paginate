@@ -1,10 +1,10 @@
 === SB Paginate ===
 Contributors: skylarkcob
 Donate link: http://hocwp.net/donate/
-Tags: sb, paginate, pagination
+Tags: sb, paginate, pagination, sb plugin, sb paginate, wp paginate, paginate plugin
 Requires at least: 3.6
 Tested up to: 4.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,9 +33,20 @@ For the custom query usage with arguments:
 		<?php get_template_part( 'content', get_post_format() ); ?>
 	<?php endwhile; wp_reset_postdata(); ?>
 	<?php if(function_exists("sb_paginate")) sb_paginate(array("query" => $test_query)); ?>
+
+Full usage with all arguments:
+
+    <?php if(function_exists("sb_paginate")) sb_paginate(array("query" => $test_query, "anchor" => 1, "range" => 1, "gap" => 3, "style" => "dark", "border_radius" => "none")); ?>
 	
 For basic usage, you can also have a look at the [plugin homepage](http://hocwp.net/).
 	
 == Screenshots ==
 
 1. The pagination in default style.
+2. The pagination in dark style with no border radius.
+
+== Changelog ==
+
+= V1.0.1 =
+* New: Add SB Options page to the Dashboard menu.
+* New: Now you can set option for pagination to show.

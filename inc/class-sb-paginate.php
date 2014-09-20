@@ -48,22 +48,42 @@ if(!class_exists("SB_Paginate")) {
 		}
 
 		public static function show($args = null) {
-			echo '<nav class="pagination loop-pagination sb-paginate">';
+            $options = get_option("sb_options");
+			$style = isset($options["paginate"]["style"]) ? $options["paginate"]["style"] : "default";
+			$border_radius = isset($options["paginate"]["border_radius"]) ? $options["paginate"]["border_radius"] : "default";
+			extract($args, EXTR_OVERWRITE);
+			$style .= '-style';
+			$class = 'pagination loop-pagination sb-paginate';
+			$class .= ' '.$style;
+			switch($border_radius) {
+				case "circle":
+					$class .= ' border-radius-circle';
+					break;
+				case "default":
+					break;
+				case "none":
+					$class .= ' no-border-radius';
+					break;
+			}
+			$class = trim($class);
+			echo '<nav class="'.$class.'">';
 			echo self::build($args);
 			echo '</nav>';
 		}
 
 
 		private static function loop_paginate($args = array()) {
-		
+		    $options = get_option("sb_options");
 			// The number of page links to show before and after the current page.
-			$range = 3;
+			$range = isset($options["paginate"]["range"]) ? $options["paginate"]["range"] : 3;;
 			
 			// The number of page links to show at beginning and end of pagination.
-			$anchor = 1;
+			$anchor = isset($options["paginate"]["anchor"]) ? $options["paginate"]["anchor"] : 1;
 			
 			// The minimum number of page links before ellipsis shows.
-			$gap = 3;
+			$gap = isset($options["paginate"]["gap"]) ? $options["paginate"]["gap"] : 3;
+            $current_page = 1;
+            $total_page = $current_page;
 			
 			extract($args, EXTR_OVERWRITE);
 			$hidden_button = '<span class="paginate-item hidden-item">...</span>';
