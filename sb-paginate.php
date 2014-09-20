@@ -4,7 +4,7 @@ Plugin Name: SB Paginate
 Plugin URI: http://hocwp.net/
 Description: SB Paginate is a pagination plugin that allows to set up navigation on WordPress site. SB Paginate not only supports the default query but also it can be used to show navigation for the custom query on WordPress.
 Author: SB Team
-Version: 1.0.1
+Version: 1.0.2
 Author URI: http://hocwp.net/
 */
 
@@ -22,9 +22,6 @@ function sb_paginate_test() {
 	return apply_filters("sb_paginate_test", false);
 }
 
-add_filter("sb_paginate_test", "__return_true");
-add_filter("sb_admin_test", "__return_true");
-
 if(!function_exists("sb_paginate_style_and_script")) {
 	function sb_paginate_style_and_script() {
 		if(sb_paginate_test()) {
@@ -39,7 +36,7 @@ if(!function_exists("sb_paginate_style_and_script")) {
 add_action("wp_enqueue_scripts", "sb_paginate_style_and_script");
 
 function sb_paginate_settings_link($links) { 
-	$settings_link = '<a href="admin.php?page=sb-paginate">Settings</a>'; 
+	$settings_link = '<a href="admin.php?page=sb_paginate">Settings</a>';
 	array_unshift($links, $settings_link); 
 	return $links; 
 }
