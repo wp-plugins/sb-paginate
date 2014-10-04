@@ -1,39 +1,39 @@
 <?php
 if(!defined('ABSPATH')) exit;
-if(!class_exists("SB_Paginate")) {
+if(!class_exists('SB_Paginate')) {
 	class SB_Paginate {
 		public static function build($args = array()) {
 			global $wp_query;
 			$query = $wp_query;
-			$label = "Pages";
-			$previous = "&laquo;";
-			$next = "&raquo;";
+			$options = get_option('sb_options');
+			$label = isset($options['paginate']['label']) ? $options['paginate']['label'] : __('Pages:', 'sb-paginate');
+			$previous = isset($options['paginate']['previous_text']) ? $options['paginate']['previous_text'] : '&laquo;';
+			$next = isset($options['paginate']['next_text']) ? $options['paginate']['next_text'] : '&raquo;';
 			
 			extract($args, EXTR_OVERWRITE);
 			
-			if(!isset($query) || empty($query) || !is_object($query)) return;
+			if(!isset($query) || empty($query) || !is_object($query)) {
+                $query = $wp_query;
+            }
 			
-			$posts_per_page = isset($query->query_vars['posts_per_page']) ? $query->query_vars['posts_per_page'] : get_option("posts_per_page");
-			
+			$posts_per_page = isset($query->query_vars['posts_per_page']) ? $query->query_vars['posts_per_page'] : get_option('posts_per_page');
+
 			if(1 > $posts_per_page) return;
 			$total_page = intval(ceil($query->found_posts / $posts_per_page));
-			$current_page = isset($query->query_vars["paged"]) ? $query->query_vars["paged"] : '0';
+
+			$current_page = isset($query->query_vars['paged']) ? $query->query_vars['paged'] : '0';
 			
 			if(1 > $current_page || $current_page > $total_page) {
 				$current_page = self::get_paged();
 			}
-			$args["current_page"] = $current_page;
+			$args['current_page'] = $current_page;
 			
 			
 			if(1 >= $total_page) return;
-			$args["total_page"] = $total_page;
+			$args['total_page'] = $total_page;
 			$result = '';
 			$label = trim($label);
 			if(!empty($label)) {
-				$last_char = mb_substr($label, -1);
-				if(':' != $last_char) {
-					$label .= ':';
-				}
 				$result .= '<span class="paginate-item label-item">'.$label.'</span>';
 			}
 
@@ -48,20 +48,20 @@ if(!class_exists("SB_Paginate")) {
 		}
 
 		public static function show($args = null) {
-            $options = get_option("sb_options");
-			$style = isset($options["paginate"]["style"]) ? $options["paginate"]["style"] : "default";
-			$border_radius = isset($options["paginate"]["border_radius"]) ? $options["paginate"]["border_radius"] : "default";
+            $options = get_option('sb_options');
+			$style = isset($options['paginate']['style']) ? $options['paginate']['style'] : 'default';
+			$border_radius = isset($options['paginate']['border_radius']) ? $options['paginate']['border_radius'] : 'default';
 			extract($args, EXTR_OVERWRITE);
 			$style .= '-style';
 			$class = 'pagination loop-pagination sb-paginate';
 			$class .= ' '.$style;
 			switch($border_radius) {
-				case "circle":
+				case 'circle':
 					$class .= ' border-radius-circle';
 					break;
-				case "default":
+				case 'default':
 					break;
-				case "none":
+				case 'none':
 					$class .= ' no-border-radius';
 					break;
 			}
@@ -73,15 +73,15 @@ if(!class_exists("SB_Paginate")) {
 
 
 		private static function loop_paginate($args = array()) {
-		    $options = get_option("sb_options");
+		    $options = get_option('sb_options');
 			// The number of page links to show before and after the current page.
-			$range = isset($options["paginate"]["range"]) ? $options["paginate"]["range"] : 3;;
+			$range = isset($options['paginate']['range']) ? $options['paginate']['range'] : 3;;
 			
 			// The number of page links to show at beginning and end of pagination.
-			$anchor = isset($options["paginate"]["anchor"]) ? $options["paginate"]["anchor"] : 1;
+			$anchor = isset($options['paginate']['anchor']) ? $options['paginate']['anchor'] : 1;
 			
 			// The minimum number of page links before ellipsis shows.
-			$gap = isset($options["paginate"]["gap"]) ? $options["paginate"]["gap"] : 3;
+			$gap = isset($options['paginate']['gap']) ? $options['paginate']['gap'] : 3;
             $current_page = 1;
             $total_page = $current_page;
 			

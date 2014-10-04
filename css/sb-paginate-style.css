@@ -8,6 +8,10 @@
     text-decoration: none;
 }
 
+.sb-paginate .paginate-item.label-item {
+    margin-left: 0;
+}
+
 .sb-paginate.default-style .paginate-item {
     background-color: #f4f5f5; background-image: -webkit-gradient(linear, left top, left bottom, from(#f4f5f5), to(#dfdddd));
     background-image: -webkit-linear-gradient(top, #f4f5f5, #dfdddd);
