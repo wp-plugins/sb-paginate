@@ -24,48 +24,66 @@ function sb_paginate_setting_field() {
 add_action('sb_admin_init', 'sb_paginate_setting_field');
 
 function sb_paginate_next_text_callback() {
-	$options = get_option('sb_options');
+	$options = SB_Option::get();
 	$value = isset($options['paginate']['next_text']) ? $options['paginate']['next_text'] : '&raquo;';
 	$id = 'sb_paginate_next_text';
 	$name = 'sb_options[paginate][next_text]';
 	$description = __('The text for previous page button.', 'sb-comment');
-	SB_Field::text_field($id, $name, $value, $description);
+    $args = array(
+        'id' => $id,
+        'name' => $name,
+        'value' => $value,
+        'desciption' => $description
+    );
+	SB_Field::text_field($args);
 }
 
 function sb_paginate_previous_text_callback() {
-	$options = get_option('sb_options');
+	$options = SB_Option::get();
 	$value = isset($options['paginate']['previous_text']) ? $options['paginate']['previous_text'] : '&laquo;';
 	$id = 'sb_paginate_previous_text';
 	$name = 'sb_options[paginate][previous_text]';
 	$description = __('The text for next page button.', 'sb-comment');
-	SB_Field::text_field($id, $name, $value, $description);
+    $args = array(
+        'id' => $id,
+        'name' => $name,
+        'value' => $value,
+        'description' => $description
+    );
+	SB_Field::text_field($args);
 }
 
 function sb_paginate_label_callback() {
-	$options = get_option('sb_options');
+	$options = SB_Option::get();
 	$value = isset($options['paginate']['label']) ? $options['paginate']['label'] : __('Pages:', 'sb-paginate');
 	$id = 'sb_paginate_label';
 	$name = 'sb_options[paginate][label]';
 	$description = __('The label text to display before pagination.', 'sb-comment');
-	SB_Field::text_field($id, $name, $value, $description);
+    $args = array(
+        'id' => $id,
+        'name' => $name,
+        'value' => $value,
+        'description' => $description
+    );
+	SB_Field::text_field($args);
 }
 
 function sb_paginate_range_callback() {
-    $options = get_option('sb_options');
+    $options = SB_Option::get();
     $value = isset($options['paginate']['range']) ? $options['paginate']['range'] : 3;
     $description = __('The number of page links to show before and after the current page.', 'sb-paginate');
     printf('<input type="number" id="%1$s" name="%2$s" value="%3$s" class="" min="1" max="100"><p class="description">%4$s</p>', 'sb_paginate_range', esc_attr('sb_options[paginate][range]'), $value, $description);
 }
 
 function sb_paginate_anchor_callback() {
-    $options = get_option('sb_options');
+    $options = SB_Option::get();
     $value = isset($options['paginate']['anchor']) ? $options['paginate']['anchor'] : 1;
     $description = __('The number of page links to show at beginning and end of pagination.', 'sb-paginate');
     printf('<input type="number" id="%1$s" name="%2$s" value="%3$s" class="" min="1" max="10"><p class="description">%4$s</p>', 'sb_paginate_anchor', esc_attr('sb_options[paginate][anchor]'), $value, $description);
 }
 
 function sb_paginate_gap_callback() {
-    $options = get_option('sb_options');
+    $options = SB_Option::get();
     $value = isset($options['paginate']['gap']) ? $options['paginate']['gap'] : 3;
     $description = __('The minimum number of page links before ellipsis shows.', 'sb-paginate');
     printf('<input type="number" id="%1$s" name="%2$s" value="%3$s" class="" min="1" max="100"><p class="description">%4$s</p>', 'sb_paginate_gap', esc_attr("sb_options[paginate][gap]"), $value, $description);
@@ -79,7 +97,7 @@ function sb_paginate_style_callback() {
     );
     $styles = apply_filters('sb_paginate_style', $args);
     $name = 'sb_paginate_style';
-    $options = get_option('sb_options');
+    $options = SB_Option::get();
     $value = isset($options['paginate']['style']) ? $options['paginate']['style'] : 'default';
     $description = __('Choose style color for pagination.', 'sb-paginate');
     ?>
@@ -101,7 +119,7 @@ function sb_paginate_border_radius_callback() {
     );
     $styles = apply_filters('sb_paginate_border_radius', $args);
     $name = 'sb_paginate_border_radius';
-    $options = get_option('sb_options');
+    $options = SB_Option::get();
     $value = isset($options['paginate']['border_radius']) ? $options['paginate']['border_radius'] : 'default';
     $description = __('You can make navigation buttons have border radius or not.', 'sb-paginate');
     ?>

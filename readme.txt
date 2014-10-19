@@ -2,9 +2,9 @@
 Contributors: skylarkcob
 Donate link: http://hocwp.net/donate/
 Tags: sb, paginate, pagination, sb plugin, sb paginate, wp paginate, paginate plugin
-Requires at least: 3.6
+Requires at least: 3.9
 Tested up to: 4.0
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,15 +30,22 @@ SB Paginate is a pagination plugin that allows to set up navigation on WordPress
 
 **Recommended WordPress Plugins**
 
-* [SB TBFA](https://wordpress.org/plugins/sb-tbfa/)
+* [SB Banner Widget](https://wordpress.org/plugins/sb-banner-widget/)
 * [SB Clean](https://wordpress.org/plugins/sb-clean/)
 * [SB Comment](https://wordpress.org/plugins/sb-comment/)
+* [SB Login Page](https://wordpress.org/plugins/sb-login-page/)
+* [SB Post Widget](https://wordpress.org/plugins/sb-post-widget/)
+* [SB Tab Widget](https://wordpress.org/plugins/sb-tab-widget/)
+* [SB TBFA](https://wordpress.org/plugins/sb-tbfa/)
 
 == Installation ==
 
-Upload the SB Paginate plugin to your blog, activate it, then put the function sb_paginate into theme file.
+Install this plugin from your WordPress site Dashboard or follow these steps below:
 
-1, 2, 3: You're done!
+1. Download plugin from WordPress Plugins directory and extract it.
+1. Upload the `sb-paginate` folder to the `/wp-content/plugins/` directory.
+1. Activate the SB Paginate plugin through the 'Plugins' menu in WordPress.
+1. Configure the plugin by going to the `SB Options` menu that appears in your admin menu.
 
 Examples:
 
@@ -75,19 +82,22 @@ Please update SB Core before you upgrade SB Paginate to new version.
 
 == Changelog ==
 
-= V1.0.4 =
-* New: Add option for user change pagination label.
+= 1.0.5 =
+Update new check core functions.
 
-= V1.0.3 =
-* Fix: Missing committed files.
+= 1.0.4 =
+New: Add option for user change pagination label.
 
-= V1.0.2 =
+= 1.0.3 =
+Fix: Missing committed files.
+
+= 1.0.2 =
 * Update: Compress css and javascript.
 * Fix: Plugin settings link bugs.
 
-= V1.0.1 =
+= 1.0.1 =
 * New: Add SB Options page to the Dashboard menu.
 * New: Now you can set option for pagination to show.
 
-= V1.0.0 =
+= 1.0.0 =
 First release of SB Paginate.
