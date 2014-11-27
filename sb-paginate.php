@@ -4,7 +4,7 @@ Plugin Name: SB Paginate
 Plugin URI: http://hocwp.net/
 Description: SB Paginate is a pagination plugin that allows to set up navigation on WordPress site. SB Paginate not only supports the default query but also it can be used to show navigation for the custom query on WordPress.
 Author: SB Team
-Version: 1.0.6
+Version: 1.0.7
 Author URI: http://hocwp.net/
 Text Domain: sb-paginate
 Domain Path: /languages/

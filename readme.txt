@@ -3,8 +3,8 @@ Contributors: skylarkcob
 Donate link: http://hocwp.net/donate/
 Tags: sb, paginate, pagination, sb plugin, sb paginate, wp paginate, paginate plugin
 Requires at least: 3.9
-Tested up to: 4.0
-Stable tag: 1.0.6
+Tested up to: 4.0.1
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,6 +81,9 @@ Please visit [homepage](http://hocwp.net) for more details.
 Please update SB Core before you upgrade SB Paginate to new version.
 
 == Changelog ==
+
+= 1.0.7 =
+Update new check core functions.
 
 = 1.0.6 =
 Update check core function.
