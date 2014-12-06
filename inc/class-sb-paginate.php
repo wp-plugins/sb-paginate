@@ -12,7 +12,7 @@ class SB_Paginate {
         global $wp_query;
         $query = $wp_query;
         $options = get_option('sb_options');
-        $label = isset($options['paginate']['label']) ? $options['paginate']['label'] : __('Pages:', 'sb-paginate');
+        $label = isset($options['paginate']['label']) ? $options['paginate']['label'] : __('Trang', 'sb-paginate');
         $previous = isset($options['paginate']['previous_text']) ? $options['paginate']['previous_text'] : '&laquo;';
         $next = isset($options['paginate']['next_text']) ? $options['paginate']['next_text'] : '&raquo;';
         $request = '';

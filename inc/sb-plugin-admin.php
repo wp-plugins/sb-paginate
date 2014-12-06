@@ -55,7 +55,7 @@ function sb_paginate_previous_text_callback() {
 
 function sb_paginate_label_callback() {
 	$options = SB_Option::get();
-	$value = isset($options['paginate']['label']) ? $options['paginate']['label'] : __('Pages:', 'sb-paginate');
+	$value = isset($options['paginate']['label']) ? $options['paginate']['label'] : __('Trang', 'sb-paginate');
 	$id = 'sb_paginate_label';
 	$name = 'sb_options[paginate][label]';
 	$description = __('The label text to display before pagination.', 'sb-comment');
